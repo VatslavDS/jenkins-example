@@ -15,7 +15,9 @@ pipeline {
         }
 
         stage ('Test if jar was generated properly') {
-            sh 'ls -A1 ./target'
+            steps {
+                sh 'ls -A1 ./target'
+            }
         }
 
         stage ('Testing Stage') {
