@@ -1,3 +1,6 @@
+choice(name: 'test_name', choices: ['com.techprimers.testing.FizzBuzztest'], description: '')
+
+
 pipeline {
     agent any
 
@@ -11,11 +14,15 @@ pipeline {
             }
         }
 
+        stage ('Test if jar was generated properly') {
+            sh 'ls -A1 ./target'
+        }
+
         stage ('Testing Stage') {
 
             steps {
                 withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn test'
+                    sh 'mvn test -Dtest=$test_name'
                 }
             }
         }
@@ -27,6 +34,11 @@ pipeline {
                     sh 'mvn deploy'
                 }
             }
+        }
+    }
+    post {
+        failure {
+            echo 'Failed due authentication problems'
         }
     }
 }
