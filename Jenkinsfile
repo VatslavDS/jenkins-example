@@ -1,5 +1,7 @@
 pipeline {
-    choice(name: 'test_name', choices: ['com.techprimers.testing.FizzBuzztest'], description: '')
+    parameters {
+        choice(name: 'test_name', choices: ['com.techprimers.testing.FizzBuzztest'], description: '')
+    }
 
     agent any
 
